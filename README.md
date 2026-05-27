@@ -17,46 +17,114 @@ Aplicación web full-stack para el MAMB, con experiencia diferenciada para adult
 ## 🚀 Setup rápido
 
 ### 1. Requisitos previos
-- Node.js v18+
-- PostgreSQL corriendo localmente
-- Git
 
-### 2. Clonar y configurar
+Antes de correr el proyecto en local, instala lo siguiente:
+
+#### Node.js v18+
+1. Descarga el instalador desde https://nodejs.org (versión LTS)
+2. Instálalo con las opciones por defecto
+3. Verifica: `node --version` y `npm --version`
+
+#### PostgreSQL
+1. Descarga desde https://www.postgresql.org/download
+2. Durante la instalación:
+   - Usuario: `postgres`
+   - Contraseña: la que prefieras (anótala, la necesitarás)
+   - Puerto: `5432` (por defecto)
+3. Verifica que el servicio esté corriendo en el Administrador de servicios de Windows
+
+#### Git
+1. Descarga desde https://git-scm.com
+2. Instala con opciones por defecto
+
+---
+
+### 2. Clonar el repositorio
 
 ```bash
-git clone <repo>
+git clone https://github.com/ramirezbreiner2927-ui/mamb-app.git
 cd mamb-app
 ```
+
+---
 
 ### 3. Backend
 
 ```bash
 cd backend
 npm install
-
-# Copiar y editar variables de entorno
-cp .env.example .env
-# Editar DATABASE_URL con tus credenciales PostgreSQL
-# Ejemplo: postgresql://postgres:password@localhost:5432/mamb_db
-
-# Generar cliente Prisma
-npx prisma generate
-
-# Crear base de datos y tablas
-npx prisma migrate dev --name init
-
-# Iniciar servidor
-npm run dev
-# → API en http://localhost:4000
 ```
 
+#### Crear el archivo .env
+
+Crea un archivo llamado `.env` dentro de la carpeta `backend/` con este contenido:
+
+```env
+DATABASE_URL="postgresql://postgres:TU_CONTRASEÑA@localhost:5432/mamb_db"
+JWT_SECRET="mamb_secret_key_2026"
+PORT=4000
+HF_TOKEN="tu_huggingface_token"
+CF_ACCOUNT_ID="tu_cloudflare_account_id"
+CF_TOKEN="tu_cloudflare_token"
+```
+
+> Reemplaza `TU_CONTRASEÑA` con la contraseña que pusiste al instalar PostgreSQL.
+
+#### Crear la carpeta de uploads
+
+Esta carpeta es necesaria para guardar las imágenes subidas por los usuarios. No se incluye en el repositorio, debes crearla manualmente:
+
+```bash
+# En Windows (cmd):
+mkdir uploads
+
+# En Mac/Linux:
+mkdir uploads
+```
+
+#### Crear la base de datos y aplicar migraciones
+
+```bash
+npx prisma migrate dev --name init
+```
+
+> Si aparece el mensaje "Drift detected" preguntando si quieres resetear, escribe `y` y presiona Enter. Esto solo borra datos de prueba anteriores.
+
+#### Iniciar el servidor
+
+```bash
+npm run dev
+# → API corriendo en http://localhost:4000
+```
+
+---
+
 ### 4. Frontend
+
+Abre una **nueva terminal** y ejecuta:
 
 ```bash
 cd frontend
 npm install
 npm run dev
 # → App en http://localhost:3000
+```
+
+Abre tu navegador en http://localhost:3000
+
+---
+
+### 5. Crear el primer administrador
+
+Después de registrarte normalmente en la app, entra a PostgreSQL y ejecuta:
+
+```bash
+psql -U postgres -d mamb_db
+```
+
+```sql
+UPDATE users SET role = 'ADMIN' WHERE email = 'tu@email.com';
+\q
 ```
 
 ---
@@ -68,6 +136,7 @@ mamb-app/
 ├── backend/
 │   ├── prisma/
 │   │   └── schema.prisma          # Modelos: User, Evento, Horario, Producto, Image
+│   ├── uploads/                   # Imágenes subidas (crear manualmente, no está en git)
 │   ├── src/
 │   │   ├── index.js               # Entry point Express
 │   │   ├── controllers/
@@ -75,7 +144,7 @@ mamb-app/
 │   │   │   ├── eventos.controller.js  # CRUD eventos
 │   │   │   ├── horarios.controller.js # CRUD horarios
 │   │   │   ├── productos.controller.js# CRUD productos
-│   │   │   └── images.controller.js   # Upload, gallery
+│   │   │   └── images.controller.js   # Upload, gallery, IA
 │   │   ├── routes/
 │   │   │   ├── auth.routes.js
 │   │   │   ├── eventos.routes.js
@@ -104,7 +173,6 @@ mamb-app/
     │       ├── KidsPage.jsx       # ✨ Experiencia infantil con IA
     │       ├── AboutPage.jsx
     │       ├── LoginPage.jsx
-    │       ├── SignupPage.jsx
     │       └── admin/
     │           ├── AdminDashboard.jsx
     │           ├── AdminEventos.jsx
@@ -171,33 +239,14 @@ Image      → id, userId, originalUrl, generatedUrl, artworkName, authorName, a
 
 ---
 
-## 🎨 Integrar IA (Arte Infantil)
+## 🎨 IA para Arte Infantil
 
-En `backend/src/controllers/images.controller.js`, en el flujo de `uploadImage`:
+El flujo de transformación de dibujos funciona en dos pasos:
 
-1. Tras guardar la imagen, llamar a tu servicio de IA (Replicate, HuggingFace, etc.)
-2. Ejemplo con Replicate / style transfer:
+1. **LLaVA (Cloudflare Workers AI)** analiza el dibujo del niño y genera una descripción en texto
+2. **Stable Diffusion XL (Cloudflare Workers AI)** toma esa descripción y genera una versión artística al estilo Álvaro Cepeda Samudio
 
-```javascript
-// Ejemplo con Replicate API
-const output = await replicate.run(
-  "stability-ai/stable-diffusion:...",
-  { input: { image: imageUrl, prompt: "estilo Álvaro Cepeda Samudio, colores Caribe" } }
-)
-await prisma.image.update({
-  where: { id: image.id },
-  data: { generatedUrl: output[0] }
-})
-```
-
----
-
-## 👤 Crear primer admin
-
-```bash
-# Después de signup normal, en PostgreSQL:
-UPDATE users SET role = 'ADMIN' WHERE email = 'tu@email.com';
-```
+Todo corre sobre la cuenta gratuita de Cloudflare Workers AI.
 
 ---
 
@@ -205,13 +254,13 @@ UPDATE users SET role = 'ADMIN' WHERE email = 'tu@email.com';
 
 ```bash
 # Backend
-npm run dev          # Servidor en modo desarrollo (nodemon)
-npm run prisma:studio # Explorar DB visualmente
+npm run dev           # Servidor en modo desarrollo (nodemon)
+npm run prisma:studio # Explorar DB visualmente en localhost:5555
 
-# Frontend  
-npm run dev          # Dev server con HMR
-npm run build        # Build para producción
-npm run preview      # Preview del build
+# Frontend
+npm run dev           # Dev server con HMR
+npm run build         # Build para producción
+npm run preview       # Preview del build
 ```
 
 ---
