@@ -13,8 +13,6 @@ const PROC_MSGS = [
   { msg: '🖼️ Creando tu obra maestra...', sub: '¡Ya casi está lista!' },
 ]
 
-const BASE_URL = 'http://localhost:4000'
-
 export default function KidsPage() {
   const { user, anonymousRegister } = useAuthStore()
   const [step, setStep] = useState('inicio')
@@ -72,8 +70,8 @@ export default function KidsPage() {
         artworkName: form.artworkName || 'Mi obra',
         authorName: form.authorName || 'Artista',
         authorAge: form.authorAge,
-        originalUrl: `${BASE_URL}${img.originalUrl}`,
-        generatedUrl: img.generatedUrl ? `${BASE_URL}${img.generatedUrl}` : null,
+        originalUrl: img.originalUrl,
+        generatedUrl: img.generatedUrl || null,
         date: new Date().toLocaleDateString('es-CO', { day: 'numeric', month: 'long', year: 'numeric' })
       })
       setStep('result')
@@ -305,7 +303,7 @@ export default function KidsPage() {
                 {gallery.map(img => (
                   <div key={img.id} className="bg-white rounded-2xl overflow-hidden shadow-md border-2 border-mamb-gold/30 hover:scale-105 transition-transform">
                     {img.generatedUrl ? (
-                      <img src={`${BASE_URL}${img.generatedUrl}`} alt={img.artworkName} className="w-full h-32 object-cover" />
+                      <img src={img.generatedUrl} alt={img.artworkName} className="w-full h-32 object-cover" />
                     ) : (
                       <div className="h-32 bg-gradient-to-br from-mamb-orange to-mamb-red flex items-center justify-center text-4xl">🎨</div>
                     )}
