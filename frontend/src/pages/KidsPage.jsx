@@ -13,6 +13,7 @@ const PROC_MSGS = [
   { msg: '🖼️ Creando tu obra maestra...', sub: '¡Ya casi está lista!' },
 ]
 
+
 export default function KidsPage() {
   const { user, anonymousRegister } = useAuthStore()
   const [step, setStep] = useState('inicio')
