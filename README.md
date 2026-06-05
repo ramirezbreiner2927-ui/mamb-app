@@ -1,7 +1,8 @@
 
 # Website
 
-This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
+Este sitio web está construido con [Docusaurus](https://docusaurus.io/), un generador de sitios web estáticos moderno.
+
 
 ## Installation
 
