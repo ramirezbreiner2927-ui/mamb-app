@@ -12,7 +12,7 @@ La aplicación integra gestión cultural, programación de eventos, horarios ins
 * Gestionar eventos y actividades culturales.
 * Publicar horarios y tarifas actualizadas.
 * Administrar los productos de la tienda oficial.
-* Ofrecer experiencias interactivas para público infantil mediante IA.
+* Ofrecer disntintas experiencias interactivas para público infantil mediante IA.
 * Facilitar la administración mediante un panel seguro basado en roles.
 
 ## Características Principales
