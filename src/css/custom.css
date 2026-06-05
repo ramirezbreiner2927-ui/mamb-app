@@ -1,0 +1,29 @@
+:root {
+  --ifm-color-primary: #d35400;
+  --ifm-background-color: #fdfaf6;
+  --ifm-navbar-background-color: #fdfaf6;
+}
+
+.hero--mamb {
+  background: linear-gradient(135deg, #d35400 0%, #e67e22 100%);
+  color: white;
+  padding: 4rem 2rem;
+  text-align: center;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+}
+
+.card-mamb {
+  background: #ffffff;
+  padding: 1.5rem;
+  border: 1px solid #f0e6d2;
+  border-radius: 12px;
+  text-align: center;
+  transition: all 0.3s ease; 
+}
+
+.card-mamb:hover {
+  transform: translateY(-10px); 
+  box-shadow: 0 15px 30px rgba(211, 84, 0, 0.2); 
+  cursor: pointer;
+}
