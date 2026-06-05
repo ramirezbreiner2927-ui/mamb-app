@@ -1,4 +1,4 @@
-# Museo de Arte Moderno de Barranquilla (MAMB)
+# Museo de Arte Moderno de Barranquilla  (MAMB)
 
 ## Descripción General
 
@@ -11,7 +11,7 @@ La aplicación integra gestión cultural, programación de eventos, horarios ins
 * Centralizar la información institucional del museo.
 * Gestionar eventos y actividades culturales.
 * Publicar horarios y tarifas actualizadas.
-* Administrar productos de la tienda oficial.
+* Administrar los productos de la tienda oficial.
 * Ofrecer experiencias interactivas para público infantil mediante IA.
 * Facilitar la administración mediante un panel seguro basado en roles.
 
