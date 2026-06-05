@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # Website
 
 This website is built using [Docusaurus](https://docusaurus.io/), a modern static website generator.
@@ -38,8 +38,6 @@ Not using SSH:
 ```bash
 GIT_USER=<Your GitHub username> yarn deploy
 ```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
 =======
 # 🏛️ MAMB — Museo de Arte Moderno de Barranquilla
 
@@ -309,4 +307,4 @@ npm run preview       # Preview del build
 ---
 
 *Desarrollado por estudiantes de Ingeniería de Sistemas · Universidad Simón Bolívar · Barranquilla 2026*
->>>>>>> f39a6097ab75bcded6ec32ef0943df5318d77870
+>>>>>>>
