@@ -9,8 +9,8 @@ const config = {
   future: {
     v4: true,
   },
-  url: 'https://ramirezbreiner2927-ui.github.io',
-  baseUrl: '/mamb-app/',
+  url: 'https://docs.mambapp.online',
+  baseUrl: '/',
   organizationName: 'ramirezbreiner2927-ui',
   projectName: 'mamb-app',
   onBrokenLinks: 'throw',
