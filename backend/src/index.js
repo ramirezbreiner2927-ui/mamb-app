@@ -19,6 +19,8 @@ const allowedOrigins = [
   'http://localhost:3000',
   'http://localhost:5173',
   'https://mamb-app.vercel.app',
+  'https://mambapp.online',
+  'https://www.mambapp.online',
   process.env.FRONTEND_URL,
 ].filter(Boolean)
 
