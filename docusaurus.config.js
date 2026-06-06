@@ -9,8 +9,8 @@ const config = {
   future: {
     v4: true,
   },
-  url: 'https://mambapp.online',
-  baseUrl: '/',
+  url: 'https://ramirezbreiner2927-ui.github.io',
+  baseUrl: '/mamb-app/',
   organizationName: 'ramirezbreiner2927-ui',
   projectName: 'mamb-app',
   onBrokenLinks: 'throw',
@@ -72,3 +72,12 @@ const config = {
             ],
           },
         ],
+        copyright: `Copyright © ${new Date().getFullYear()} MAMB Digital — Universidad Simón Bolívar, Barranquilla.`,
+      },
+      prism: {
+        theme: prismThemes.github,
+        darkTheme: prismThemes.dracula,
+      },
+    }),
+};
+export default config;
