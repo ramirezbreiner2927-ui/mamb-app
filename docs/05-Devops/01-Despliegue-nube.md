@@ -95,9 +95,10 @@ npm run prisma:studio
 
 Acceso:
 
-```text
-http://localhost:5555
-```
+:::note
+Prisma Studio corre únicamente en entorno local. No está disponible en producción.
+Accede desde tu máquina en `http://localhost:5555` después de ejecutar el comando anterior.
+:::
 
 ---
 
