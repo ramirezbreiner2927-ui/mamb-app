@@ -1,10 +1,10 @@
 // src/pages/AboutPage.jsx
 export default function AboutPage() {
   const team = [
-    { name: 'Ana Suárez', role: 'Frontend & UX', emoji: '💻' },
-    { name: 'Diego Mora', role: 'Backend & BD', emoji: '⚙️' },
-    { name: 'Valeria Ríos', role: 'IA & ML', emoji: '🤖' },
-    { name: 'Carlos Peña', role: 'Diseño & UX', emoji: '🎨' },
+    { name: 'Breiner Ramirez', role: 'Frontend & UX', emoji: '💻' },
+    { name: 'Joseph Cordoba', role: 'Backend & BD', emoji: '⚙️' },
+    { name: 'Luis Bertiz', role: 'IA & ML', emoji: '🤖' },
+    { name: 'Camilo Herrera', role: 'Diseño & UX', emoji: '🎨' },
   ]
 
   return (
